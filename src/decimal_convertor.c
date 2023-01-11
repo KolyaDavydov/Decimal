@@ -12,8 +12,7 @@
  * @return 0 - OK, 1 - ошибка конвертации
  */
 int s21_from_int_to_decimal(int src, s21_decimal *dst) {
-  memset(&dst->bits, 0, sizeof(dst->bits));
-
+  null_result(dst);
   if (src < 0) {
     setbit(&(dst->bits[3]), 31);
     src = -src;
@@ -33,7 +32,7 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
  * @return 0 - OK, 1 - ошибка конвертации
  */
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
-  memset(&dst->bits, 0, sizeof(dst->bits));
+  null_result(dst);
   if (src < 0) {
     setbit(&(dst->bits[3]), 31);
     src = -src;
@@ -108,6 +107,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
  * @return 0 - OK, 1 - ошибка конвертации
  */
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
+  *dst = 0;
   int error = 0;
   int exp = getexp(src.bits[3]);
   char str_of_int[40] = {0};
@@ -146,10 +146,11 @@ int s21_from_decimal_to_int(s21_decimal src, int *dst) {
  * @return 0 - OK, 1 - ошибка конвертации
  */
 int s21_from_decimal_to_float(s21_decimal src, float *dst) {
+  *dst = 0.0f;
   int err = 0;
   char str_of_int[40] = {0};
   for (int i = 0; i < 39; i++) str_of_int[i] = '0';
-  
+
   // decimal переводим в строку цифр длиной 40 цифр, где в начале будут нули
   decimal_to_str_of_num(src, str_of_int);
 
@@ -166,7 +167,7 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
   int val = strcspn(str_of_int, ".123456789");
   char temp[40] = {0};
   for (int i = 0; i < 39; i++) temp[i] = '0';
-  
+
   snprintf(temp, strlen(&str_of_int[val - 1]) + 1, "%s", &str_of_int[val - 1]);
   *dst = atof(temp);
   if (getbit(src.bits[3], 31)) *dst *= -1;

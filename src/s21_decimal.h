@@ -25,17 +25,6 @@ typedef struct {
   int bits[4];
 } s21_decimal;
 
-int is_set_bit(int index, size_t number);
-int set_bit(int index, int number);
-int invers_bit(int index, int number);
-int reset_bit(int index, int number);
-void get_bin_str(char* buff, s21_decimal dec, int i);
-int s21_is_less(s21_decimal val_1, s21_decimal val_2);
-void sig_bit(s21_decimal val, char* buff);
-int exp_bit(int ex);
-char* struct_to_bin_str(s21_decimal dec);
-char* bin_to_dec(s21_decimal dec);
-
 /* ===== Arithmetic operations ===== */
 
 int s21_add(s21_decimal value_1, s21_decimal value_2,
@@ -157,5 +146,6 @@ int is_zero_decimal(s21_decimal dec);
 
 void shift_right_decimal_str(char* str);
 void shift_left_decimal_str(char* str);
+void null_result(s21_decimal* result);
 
 #endif  // SRC_S21_DECIMAL_H_

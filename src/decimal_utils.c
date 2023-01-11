@@ -534,3 +534,10 @@ int is_zero_decimal(s21_decimal dec) {
   if (dec.bits[0] == 0 && dec.bits[1] == 0 && dec.bits[2] == 0) is_zero = 1;
   return is_zero;
 }
+
+void null_result(s21_decimal* result) {
+  result->bits[0] = 0;
+  result->bits[1] = 0;
+  result->bits[2] = 0;
+  result->bits[3] = 0;
+}

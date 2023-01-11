@@ -28,15 +28,14 @@ gcov_report: test
 	genhtml -o report report.info
 	open ./report/index.html
 
-# valgrind:
-# $(CC) $(CFLAGS) $(LDFLAGS) $(LIBSOURCES) s21_decimal_comparison.c test_valgrind.c s21_decimal.h decstr.h -o vtests_run
-# sh valgrind.sh ./vtests_run
+valgrind:
+	$(CC) $(CFLAGS) $(LDFLAGS) $(LIBSOURCES) test_valgrind.c s21_decimal.h decstr.h -o vtests_run
+	sh valgrind.sh ./vtests_run
 
 # docker_test:
 # 	sh ./run.sh
 
 rebuild: clean all
-
 
 clean:
 	rm -rf *.o \

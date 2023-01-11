@@ -4,11 +4,7 @@
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int err = 0;
-
-  result->bits[0] = 0;
-  result->bits[1] = 0;
-  result->bits[2] = 0;
-  result->bits[3] = 0;
+  null_result(result);
 
   char decimal_str_1[117] = {0};
   init_decimal_str(decimal_str_1);
@@ -89,10 +85,7 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int err = 0;
 
-  result->bits[0] = 0;
-  result->bits[1] = 0;
-  result->bits[2] = 0;
-  result->bits[3] = 0;
+  null_result(result);
 
   char decimal_str_1[117] = {0};
   init_decimal_str(decimal_str_1);
@@ -159,10 +152,7 @@ int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int err = 0;
 
-  result->bits[0] = 0;
-  result->bits[1] = 0;
-  result->bits[2] = 0;
-  result->bits[3] = 0;
+  null_result(result);
 
   char decimal_str_1[117] = {0};
   init_decimal_str(decimal_str_1);
@@ -243,10 +233,7 @@ int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int err = 0;
 
-  result->bits[0] = 0;
-  result->bits[1] = 0;
-  result->bits[2] = 0;
-  result->bits[3] = 0;
+  null_result(result);
 
   if (is_zero_decimal(value_2) == 1) {
     err = 3;
@@ -333,10 +320,7 @@ int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int sign_value_1 = 0;
   int flag = 0;
 
-  result->bits[0] = 0;
-  result->bits[1] = 0;
-  result->bits[2] = 0;
-  result->bits[3] = 0;
+  null_result(result);
 
   s21_decimal int_dec = {{0, 0, 0, 0}};
   s21_decimal mul_int_dec_val_2 = {{0, 0, 0, 0}};

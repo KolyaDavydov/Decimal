@@ -1,6 +1,7 @@
 #include "s21_decimal.h"
 
 int s21_floor(s21_decimal value, s21_decimal *result) {
+  null_result(result);
   if (getbit(value.bits[3], 31)) {
     s21_decimal one = {{1, 0, 0, 0}}, tmp = {{0, 0, 0, 0}};
     setsign(&one.bits[3], 1);
@@ -16,6 +17,7 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
 }
 
 int s21_round(s21_decimal value, s21_decimal *result) {
+  null_result(result);
   int sign = getbit(value.bits[3], 31);
   decstr_t dstr = {0};
   decstr_from_decimal(&dstr, &value);
@@ -35,6 +37,7 @@ int s21_round(s21_decimal value, s21_decimal *result) {
 }
 
 int s21_truncate(s21_decimal value, s21_decimal *result) {
+  null_result(result);
   decstr_t dstr = {0};
   char bits[100] = {0}, *bits_p = bits;
   bitstr_init(bits_p, '0');
@@ -50,7 +53,7 @@ int s21_truncate(s21_decimal value, s21_decimal *result) {
 }
 
 int s21_negate(s21_decimal value, s21_decimal *result) {
-  memset(&result->bits, 0, sizeof(result->bits));
+  null_result(result);
 
   setsign(&result->bits[3], !getbit(value.bits[3], 31));
 
