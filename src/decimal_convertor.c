@@ -110,13 +110,9 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
   int error = 0;
   int exp = getexp(src.bits[3]);
-  char str_of_int[40];
-  for (int i = 0; i < 40; i++) {
-    if (i == 40 - 1)
-      str_of_int[i] = '\0';
-    else
-      str_of_int[i] = '0';
-  }
+  char str_of_int[40] = {0};
+  for (int i = 0; i < 39; i++) str_of_int[i] = '0';
+
   int sign = 0;
   if (getbit(src.bits[3], 31) == 0) {
     sign = 1;
@@ -151,14 +147,9 @@ int s21_from_decimal_to_int(s21_decimal src, int *dst) {
  */
 int s21_from_decimal_to_float(s21_decimal src, float *dst) {
   int err = 0;
-  char str_of_int[40];
-  for (int i = 0; i < 40; i++) {
-    if (i == 40 - 1)
-      str_of_int[i] = '\0';
-    else
-      str_of_int[i] = '0';
-  }
-
+  char str_of_int[40] = {0};
+  for (int i = 0; i < 39; i++) str_of_int[i] = '0';
+  
   // decimal переводим в строку цифр длиной 40 цифр, где в начале будут нули
   decimal_to_str_of_num(src, str_of_int);
 
@@ -173,14 +164,9 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
   // получаем количество нулей в начале строки либо до точки либо до значащих
   // цифр
   int val = strcspn(str_of_int, ".123456789");
-  char temp[40];
-  for (int i = 0; i < 40; i++) {
-    if (i == 40 - 1)
-      temp[i] = '\0';
-    else
-      temp[i] = '0';
-  }
-
+  char temp[40] = {0};
+  for (int i = 0; i < 39; i++) temp[i] = '0';
+  
   snprintf(temp, strlen(&str_of_int[val - 1]) + 1, "%s", &str_of_int[val - 1]);
   *dst = atof(temp);
   if (getbit(src.bits[3], 31)) *dst *= -1;
